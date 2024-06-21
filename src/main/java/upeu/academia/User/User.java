@@ -4,6 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import java.util.Collection;
@@ -20,11 +23,11 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * @author Miguel Adrian
  */
+@Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(
         name = "user",
         uniqueConstraints = {
@@ -34,6 +37,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 // funcione correctamente
 public class User implements UserDetails {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     
     Integer id;
 
     @Column(nullable = false)
