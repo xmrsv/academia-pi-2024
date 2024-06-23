@@ -13,10 +13,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+/**
+ *
+ * @author Miguel Gonzales
+ */
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "p8c4yn1294c124";
+    private static final String SECRET_KEY = "36311361b2f3ced0649882cde13d2eebb43602610559e36edf095ac368102a33";
 
     public String getToken(UserDetails user) {
         return getToken(new HashMap<>(), user);
@@ -28,6 +32,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
+                // 1 day until expire
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();

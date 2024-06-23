@@ -26,19 +26,24 @@ public class InscripcionController {
     private InscripcionService inscripcionService;
 
     @GetMapping("/inscripciones")
-    public List<Inscripcion> buscartodos() {
-        return inscripcionService.buscarTodos();
+    public List<Inscripcion> listarTodos() {
+        return inscripcionService.listarTodos();
+    }
+
+    @GetMapping("/inscripciones/{id}")
+    public Optional<Inscripcion> obtenerPorId(@PathVariable("id") Integer inscripcionId) {
+        return inscripcionService.obtenerPorId(inscripcionId);
     }
 
     @PostMapping("/inscripciones")
-    public Inscripcion guardar(@RequestBody Inscripcion inscripcion) {
-        inscripcionService.guardar(inscripcion);
+    public Inscripcion crear(@RequestBody Inscripcion inscripcion) {
+        inscripcionService.crear(inscripcion);
         return inscripcion;
     }
 
     @PutMapping("/inscripciones")
-    public Inscripcion editar(@RequestBody Inscripcion inscripcion) {
-        inscripcionService.editar(inscripcion);
+    public Inscripcion actualizar(@RequestBody Inscripcion inscripcion) {
+        inscripcionService.actualizar(inscripcion);
         return inscripcion;
     }
 
@@ -47,8 +52,4 @@ public class InscripcionController {
         inscripcionService.eliminarPorId(inscripcionId);
     }
 
-    @GetMapping("/inscripciones/{id}")
-    public Optional<Inscripcion> buscarPorId(@PathVariable("id") Integer inscripcionId) {
-        return inscripcionService.buscarPorId(inscripcionId);
-    }
 }

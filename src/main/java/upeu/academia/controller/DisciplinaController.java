@@ -26,19 +26,24 @@ public class DisciplinaController {
     private IDisciplinaService disciplinaService;
 
     @GetMapping("/disciplinas")
-    public List<Disciplina> buscartodos() {
-        return disciplinaService.buscarTodos();
+    public List<Disciplina> listarTodos() {
+        return disciplinaService.listarTodos();
+    }
+
+    @GetMapping("/disciplinas/{id}")
+    public Optional<Disciplina> obtenerPorId(@PathVariable("id") Integer disciplinaId) {
+        return disciplinaService.obtenerPorId(disciplinaId);
     }
 
     @PostMapping("/disciplinas")
-    public Disciplina guardar(@RequestBody Disciplina disciplina) {
-        disciplinaService.guardar(disciplina);
+    public Disciplina crear(@RequestBody Disciplina disciplina) {
+        disciplinaService.crear(disciplina);
         return disciplina;
     }
 
     @PutMapping("/disciplinas")
-    public Disciplina editar(@RequestBody Disciplina disciplina) {
-        disciplinaService.editar(disciplina);
+    public Disciplina actualizar(@RequestBody Disciplina disciplina) {
+        disciplinaService.actualizar(disciplina);
         return disciplina;
     }
 
@@ -47,8 +52,4 @@ public class DisciplinaController {
         disciplinaService.eliminarPorId(disciplinaId);
     }
 
-    @GetMapping("/disciplinas/{id}")
-    public Optional<Disciplina> buscarPorId(@PathVariable("id") Integer disciplinaId) {
-        return disciplinaService.buscarPorId(disciplinaId);
-    }
 }

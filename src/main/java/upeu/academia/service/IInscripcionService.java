@@ -10,13 +10,13 @@ import java.util.Optional;
  */
 public interface IInscripcionService {
 
-    List<Inscripcion> buscarTodos();
+    List<Inscripcion> listarTodos();
 
-    void guardar(Inscripcion inscripcion);
+    Optional<Inscripcion> obtenerPorId(Integer inscripcionId);
 
-    void editar(Inscripcion inscripcion);
+    void crear(Inscripcion inscripcion);
 
-    Optional<Inscripcion> buscarPorId(Integer inscripcionId);
+    void actualizar(Inscripcion inscripcion);
 
     void eliminarPorId(Integer inscripcionId);
 

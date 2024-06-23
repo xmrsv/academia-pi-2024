@@ -26,19 +26,24 @@ public class ResponsableController {
     private IResponsableService responsableService;
 
     @GetMapping("/responsable")
-    public List<Responsable> buscartodos() {
-        return responsableService.buscarTodos();
+    public List<Responsable> listarTodos() {
+        return responsableService.listarTodos();
+    }
+
+    @GetMapping("/responsable/{id}")
+    public Optional<Responsable> obtenerPorId(@PathVariable("id") Integer responsableId) {
+        return responsableService.obtenerPorId(responsableId);
     }
 
     @PostMapping("/responsable")
-    public Responsable guardar(@RequestBody Responsable responsable) {
-        responsableService.guardar(responsable);
+    public Responsable crear(@RequestBody Responsable responsable) {
+        responsableService.crear(responsable);
         return responsable;
     }
 
     @PutMapping("/responsable")
-    public Responsable editar(@RequestBody Responsable responsable) {
-        responsableService.editar(responsable);
+    public Responsable actualizar(@RequestBody Responsable responsable) {
+        responsableService.actualizar(responsable);
         return responsable;
     }
 
@@ -47,8 +52,4 @@ public class ResponsableController {
         responsableService.eliminarPorId(responsableId);
     }
 
-    @GetMapping("/responsable/{id}")
-    public Optional<Responsable> buscarPorId(@PathVariable("id") Integer responsableId) {
-        return responsableService.buscarPorId(responsableId);
-    }
 }

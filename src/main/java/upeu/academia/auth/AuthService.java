@@ -6,11 +6,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
-import upeu.academia.User.Role;
-import upeu.academia.User.User;
+import upeu.academia.entity.Rol;
+import upeu.academia.entity.Usuario;
 import upeu.academia.User.UserRepository;
 import upeu.academia.jwt.JwtService;
 
+/**
+ *
+ * @author Miguel Gonzales
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -31,13 +35,13 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
-        User user = User.builder()
+        Usuario user = Usuario.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .firstName(request.getFirstName())
                 .lastName(request.lastName)
                 .country(request.getCountry())
-                .role(Role.USER)
+                .role(Rol.USER)
                 .build();
 
         userRepository.save(user);

@@ -19,28 +19,28 @@ public class InscripcionService implements IInscripcionService {
     private IInscripcionRepository inscripcionRepository;
 
     @Override
-    public List<Inscripcion> buscarTodos() {
+    public List<Inscripcion> listarTodos() {
         return inscripcionRepository.findAll();
     }
 
     @Override
-    public void guardar(Inscripcion inscripciones) {
-        inscripcionRepository.save(inscripciones);
+    public void crear(Inscripcion inscripcion) {
+        inscripcionRepository.save(inscripcion);
     }
 
     @Override
-    public void editar(Inscripcion inscripciones) {
-        inscripcionRepository.save(inscripciones);
+    public void actualizar(Inscripcion inscripcion) {
+        inscripcionRepository.save(inscripcion);
     }
 
     @Override
-    public Optional<Inscripcion> buscarPorId(Integer id) {
-        return inscripcionRepository.findById(id);
+    public Optional<Inscripcion> obtenerPorId(Integer inscripcionId) {
+        return inscripcionRepository.findById(inscripcionId);
     }
 
     @Override
-    public void eliminarPorId(Integer id) {
-        inscripcionRepository.deleteById(id);
+    public void eliminarPorId(Integer inscripcionId) {
+        inscripcionRepository.deleteById(inscripcionId);
     }
 
 }

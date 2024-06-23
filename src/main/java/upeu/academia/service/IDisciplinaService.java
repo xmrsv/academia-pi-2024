@@ -10,13 +10,13 @@ import java.util.Optional;
  */
 public interface IDisciplinaService {
 
-    List<Disciplina> buscarTodos();
+    List<Disciplina> listarTodos();
 
-    void guardar(Disciplina disciplina);
+    Optional<Disciplina> obtenerPorId(Integer disciplinaId);
 
-    void editar(Disciplina disciplina);
+    void crear(Disciplina disciplina);
 
-    Optional<Disciplina> buscarPorId(Integer disciplinaId);
+    void actualizar(Disciplina disciplina);
 
     void eliminarPorId(Integer disciplinaId);
 

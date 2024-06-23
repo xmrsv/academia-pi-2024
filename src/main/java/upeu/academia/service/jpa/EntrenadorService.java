@@ -19,28 +19,28 @@ public class EntrenadorService implements IEntrenadorService {
     private IEntrenadorRepository entrenadorRepository;
 
     @Override
-    public List<Entrenador> buscarTodos() {
+    public List<Entrenador> listarTodos() {
         return entrenadorRepository.findAll();
     }
 
     @Override
-    public void guardar(Entrenador entrenadores) {
-        entrenadorRepository.save(entrenadores);
+    public void crear(Entrenador entrenador) {
+        entrenadorRepository.save(entrenador);
     }
 
     @Override
-    public void editar(Entrenador entrenadores) {
-        entrenadorRepository.save(entrenadores);
+    public void actualizar(Entrenador entrenador) {
+        entrenadorRepository.save(entrenador);
     }
 
     @Override
-    public Optional<Entrenador> buscarPorId(Integer id) {
-        return entrenadorRepository.findById(id);
+    public Optional<Entrenador> obtenerPorId(Integer entrenadorId) {
+        return entrenadorRepository.findById(entrenadorId);
     }
 
     @Override
-    public void eliminarPorId(Integer id) {
-        entrenadorRepository.deleteById(id);
+    public void eliminarPorId(Integer entrenadorId) {
+        entrenadorRepository.deleteById(entrenadorId);
     }
 
 }

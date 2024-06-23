@@ -10,13 +10,13 @@ import java.util.Optional;
  */
 public interface IResponsableService {
 
-    List<Responsable> buscarTodos();
+    List<Responsable> listarTodos();
 
-    void guardar(Responsable responsable);
+    Optional<Responsable> obtenerPorId(Integer responsableId);
 
-    void editar(Responsable responsable);
+    void crear(Responsable responsable);
 
-    Optional<Responsable> buscarPorId(Integer responsableId);
+    void actualizar(Responsable responsable);
 
     void eliminarPorId(Integer responsableId);
 

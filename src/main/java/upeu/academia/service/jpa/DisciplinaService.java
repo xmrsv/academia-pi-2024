@@ -19,28 +19,28 @@ public class DisciplinaService implements IDisciplinaService {
     private IDisciplinaRepository disciplinaRepository;
 
     @Override
-    public List<Disciplina> buscarTodos() {
+    public List<Disciplina> listarTodos() {
         return disciplinaRepository.findAll();
     }
 
     @Override
-    public void guardar(Disciplina disciplinas) {
-        disciplinaRepository.save(disciplinas);
+    public void crear(Disciplina disciplina) {
+        disciplinaRepository.save(disciplina);
     }
 
     @Override
-    public void editar(Disciplina disciplinas) {
-        disciplinaRepository.save(disciplinas);
+    public void actualizar(Disciplina disciplina) {
+        disciplinaRepository.save(disciplina);
     }
 
     @Override
-    public Optional<Disciplina> buscarPorId(Integer id) {
-        return disciplinaRepository.findById(id);
+    public Optional<Disciplina> obtenerPorId(Integer disciplinaId) {
+        return disciplinaRepository.findById(disciplinaId);
     }
 
     @Override
-    public void eliminarPorId(Integer id) {
-        disciplinaRepository.deleteById(id);
+    public void eliminarPorId(Integer disciplinaId) {
+        disciplinaRepository.deleteById(disciplinaId);
     }
 
 }

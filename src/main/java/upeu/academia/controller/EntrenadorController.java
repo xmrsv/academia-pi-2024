@@ -26,19 +26,24 @@ public class EntrenadorController {
     private IEntrenadorService entrenadorService;
 
     @GetMapping("/entrenadores")
-    public List<Entrenador> buscartodos() {
-        return entrenadorService.buscarTodos();
+    public List<Entrenador> listarTodos() {
+        return entrenadorService.listarTodos();
+    }
+
+    @GetMapping("/entrenadores/{id}")
+    public Optional<Entrenador> obtenerPorId(@PathVariable("id") Integer entrenadorId) {
+        return entrenadorService.obtenerPorId(entrenadorId);
     }
 
     @PostMapping("/entrenadores")
-    public Entrenador guardar(@RequestBody Entrenador entrenador) {
-        entrenadorService.guardar(entrenador);
+    public Entrenador crear(@RequestBody Entrenador entrenador) {
+        entrenadorService.crear(entrenador);
         return entrenador;
     }
 
     @PutMapping("/entrenadores")
-    public Entrenador editar(@RequestBody Entrenador entrenador) {
-        entrenadorService.editar(entrenador);
+    public Entrenador actualizar(@RequestBody Entrenador entrenador) {
+        entrenadorService.actualizar(entrenador);
         return entrenador;
     }
 
@@ -47,8 +52,4 @@ public class EntrenadorController {
         entrenadorService.eliminarPorId(entrenadorId);
     }
 
-    @GetMapping("/entrenadores/{id}")
-    public Optional<Entrenador> buscarPorId(@PathVariable("id") Integer entrenadorId) {
-        return entrenadorService.buscarPorId(entrenadorId);
-    }
 }

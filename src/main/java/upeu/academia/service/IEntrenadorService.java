@@ -10,14 +10,14 @@ import java.util.Optional;
  */
 public interface IEntrenadorService {
 
-    List<Entrenador> buscarTodos();
+    List<Entrenador> listarTodos();
 
-    void guardar(Entrenador entrenador);
+    Optional<Entrenador> obtenerPorId(Integer entrenadorId);
 
-    void editar(Entrenador entrenador);
+    void crear(Entrenador entrenador);
 
-    Optional<Entrenador> buscarPorId(Integer entrenadorId);
+    void actualizar(Entrenador entrenador);
 
-    void eliminarPorId(Integer entrenador);
+    void eliminarPorId(Integer entrenadorId);
 
 }

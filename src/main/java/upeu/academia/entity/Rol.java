@@ -1,9 +1,9 @@
-package upeu.academia.User;
+package upeu.academia.entity;
 
 /**
  *
  * @author Miguel Adrian
  */
-public enum Role {
+public enum Rol {
     USER, ADMIN
 }

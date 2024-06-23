@@ -1,4 +1,4 @@
-package upeu.academia.User;
+package upeu.academia.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,10 +35,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 )
 // IMPORTANTE usar UserDetails para que Spring Security
 // funcione correctamente
-public class User implements UserDetails {
+public class Usuario implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @Column(nullable = false)
@@ -50,7 +50,7 @@ public class User implements UserDetails {
     String country;
 
     @Enumerated(EnumType.STRING)
-    Role role;
+    Rol role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

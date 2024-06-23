@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  *
- * @author Miguel Adrian
+ * @author Miguel Gonzales
  */
 @Data
 @Builder
@@ -17,5 +17,5 @@ public class LoginRequest {
 
     String username;
     String password;
-    
+
 }

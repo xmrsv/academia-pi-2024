@@ -19,28 +19,28 @@ public class ResponsableService implements IResponsableService {
     private IResponsableRepository responsableRepository;
 
     @Override
-    public List<Responsable> buscarTodos() {
+    public List<Responsable> listarTodos() {
         return responsableRepository.findAll();
     }
 
     @Override
-    public void guardar(Responsable responsable) {
+    public void crear(Responsable responsable) {
         responsableRepository.save(responsable);
     }
 
     @Override
-    public void editar(Responsable responsable) {
+    public void actualizar(Responsable responsable) {
         responsableRepository.save(responsable);
     }
 
     @Override
-    public Optional<Responsable> buscarPorId(Integer id) {
-        return responsableRepository.findById(id);
+    public Optional<Responsable> obtenerPorId(Integer responsableId) {
+        return responsableRepository.findById(responsableId);
     }
 
     @Override
-    public void eliminarPorId(Integer id) {
-        responsableRepository.deleteById(id);
+    public void eliminarPorId(Integer responsableId) {
+        responsableRepository.deleteById(responsableId);
     }
 
 }

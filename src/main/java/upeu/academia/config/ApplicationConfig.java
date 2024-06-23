@@ -13,34 +13,60 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import upeu.academia.User.UserRepository;
 
+/**
+ * Configuración de autenticación para la aplicación.
+ *
+ * @author Miguel Gonzales
+ */
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
     private final UserRepository userRepository;
 
+    /**
+     * Crea el AuthenticationManager de Spring Security.
+     *
+     * @param config Configuración de autenticación.
+     * @return AuthenticationManager configurado.
+     * @throws Exception Si ocurre un error durante la configuración.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
+    /**
+     * Crea el proveedor de autenticación DAO.
+     *
+     * @return DaoAuthenticationProvider configurado.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailService());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService());
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
 
+    /**
+     * Crea el codificador de contraseñas BCrypt.
+     *
+     * @return BCryptPasswordEncoder configurado.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Crea el servicio de detalles de usuario.
+     *
+     * @return UserDetailsService configurado.
+     */
     @Bean
-    public UserDetailsService userDetailService() {
+    public UserDetailsService userDetailsService() {
         return username -> userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not fournd"));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
     }
-
 }

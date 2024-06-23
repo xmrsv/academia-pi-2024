@@ -19,36 +19,37 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("/apispring")
+@RequestMapping("apispring")
 public class AlumnoController {
 
     @Autowired
     private IAlumnoService alumnoService;
 
-    @GetMapping("/alumnos")
-    public List<Alumno> buscartodos() {
-        return alumnoService.buscarTodos();
+    @GetMapping("alumnos")
+    public List<Alumno> listarTodos() {
+        return alumnoService.listarTodos();
     }
 
-    @PostMapping("/alumnos")
-    public Alumno guardar(@RequestBody Alumno alumno) {
-        alumnoService.guardar(alumno);
+    @GetMapping("alumnos/{id}")
+    public Optional<Alumno> obtenerPorId(@PathVariable("id") Integer alumnoId) {
+        return alumnoService.obtenerPorId(alumnoId);
+    }
+
+    @PostMapping("alumnos")
+    public Alumno crear(@RequestBody Alumno alumno) {
+        alumnoService.crear(alumno);
         return alumno;
     }
 
-    @PutMapping("/alumnos")
-    public Alumno editar(@RequestBody Alumno alumno) {
-        alumnoService.editar(alumno);
+    @PutMapping("alumnos")
+    public Alumno actualizar(@RequestBody Alumno alumno) {
+        alumnoService.actualizar(alumno);
         return alumno;
     }
 
-    @DeleteMapping("/alumnos/{id}")
+    @DeleteMapping("alumnos/{id}")
     public void eliminarPorId(@PathVariable("id") Integer alumnoId) {
         alumnoService.eliminarPorId(alumnoId);
     }
 
-    @GetMapping("/alumnos/{id}")
-    public Optional<Alumno> buscarPorId(@PathVariable("id") Integer alumnoId) {
-        return alumnoService.buscarPorId(alumnoId);
-    }
 }

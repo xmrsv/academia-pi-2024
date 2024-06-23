@@ -10,13 +10,13 @@ import java.util.Optional;
  */
 public interface IAlumnoService {
 
-    List<Alumno> buscarTodos();
+    List<Alumno> listarTodos();
 
-    void guardar(Alumno alumno);
+    Optional<Alumno> obtenerPorId(Integer alumnoId);
 
-    void editar(Alumno alumno);
+    void crear(Alumno alumno);
 
-    Optional<Alumno> buscarPorId(Integer alumnoId);
+    void actualizar(Alumno alumno);
 
     void eliminarPorId(Integer alumnoId);
 

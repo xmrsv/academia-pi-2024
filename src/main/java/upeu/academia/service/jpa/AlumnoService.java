@@ -19,28 +19,28 @@ public class AlumnoService implements IAlumnoService {
     private IAlumnoRepository alumnoRepository;
 
     @Override
-    public List<Alumno> buscarTodos() {
+    public List<Alumno> listarTodos() {
         return alumnoRepository.findAll();
     }
 
     @Override
-    public void guardar(Alumno alumnos) {
-        alumnoRepository.save(alumnos);
+    public void crear(Alumno alumno) {
+        alumnoRepository.save(alumno);
     }
 
     @Override
-    public void editar(Alumno alumnos) {
-        alumnoRepository.save(alumnos);
+    public void actualizar(Alumno alumno) {
+        alumnoRepository.save(alumno);
     }
 
     @Override
-    public Optional<Alumno> buscarPorId(Integer id) {
-        return alumnoRepository.findById(id);
+    public Optional<Alumno> obtenerPorId(Integer alumnoId) {
+        return alumnoRepository.findById(alumnoId);
     }
 
     @Override
-    public void eliminarPorId(Integer id) {
-        alumnoRepository.deleteById(id);
+    public void eliminarPorId(Integer alumnoId) {
+        alumnoRepository.deleteById(alumnoId);
     }
 
 }
