@@ -1,6 +1,6 @@
 package upeu.academia.service.jpa;
 
-import upeu.academia.entity.Responsable;
+import upeu.academia.domain.entity.Responsable;
 import upeu.academia.repository.IResponsableRepository;
 import upeu.academia.service.IResponsableService;
 import java.util.List;

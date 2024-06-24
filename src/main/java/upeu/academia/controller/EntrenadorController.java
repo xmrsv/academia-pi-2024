@@ -1,6 +1,6 @@
 package upeu.academia.controller;
 
-import upeu.academia.entity.Entrenador;
+import upeu.academia.domain.entity.Entrenador;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,35 +19,35 @@ import upeu.academia.service.IEntrenadorService;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("/apispring")
+@RequestMapping("api")
 public class EntrenadorController {
 
     @Autowired
     private IEntrenadorService entrenadorService;
 
-    @GetMapping("/entrenadores")
+    @GetMapping("entrenadores")
     public List<Entrenador> listarTodos() {
         return entrenadorService.listarTodos();
     }
 
-    @GetMapping("/entrenadores/{id}")
+    @GetMapping("entrenador/{id}")
     public Optional<Entrenador> obtenerPorId(@PathVariable("id") Integer entrenadorId) {
         return entrenadorService.obtenerPorId(entrenadorId);
     }
 
-    @PostMapping("/entrenadores")
+    @PostMapping("entrenador")
     public Entrenador crear(@RequestBody Entrenador entrenador) {
         entrenadorService.crear(entrenador);
         return entrenador;
     }
 
-    @PutMapping("/entrenadores")
+    @PutMapping("entrenador")
     public Entrenador actualizar(@RequestBody Entrenador entrenador) {
         entrenadorService.actualizar(entrenador);
         return entrenador;
     }
 
-    @DeleteMapping("/entrenadores/{id}")
+    @DeleteMapping("entrenador/{id}")
     public void eliminarPorId(@PathVariable("id") Integer entrenadorId) {
         entrenadorService.eliminarPorId(entrenadorId);
     }

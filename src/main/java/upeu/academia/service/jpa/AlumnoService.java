@@ -1,6 +1,6 @@
 package upeu.academia.service.jpa;
 
-import upeu.academia.entity.Alumno;
+import upeu.academia.domain.entity.Alumno;
 import upeu.academia.service.IAlumnoService;
 import java.util.List;
 import java.util.Optional;
@@ -24,13 +24,13 @@ public class AlumnoService implements IAlumnoService {
     }
 
     @Override
-    public void crear(Alumno alumno) {
-        alumnoRepository.save(alumno);
+    public Alumno crear(Alumno alumno) {
+        return alumnoRepository.save(alumno);
     }
 
     @Override
-    public void actualizar(Alumno alumno) {
-        alumnoRepository.save(alumno);
+    public Alumno actualizar(Alumno alumno) {
+        return alumnoRepository.save(alumno);
     }
 
     @Override

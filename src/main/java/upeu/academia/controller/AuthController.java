@@ -1,5 +1,7 @@
 package upeu.academia.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +25,16 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity login(@RequestBody LoginRequest request) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            return ResponseEntity.ok(authService.login(request));
+        } catch (Exception e) {
+            response.put("error", "unauthorized: " + e.getMessage());
+            return ResponseEntity.status(401).body(response);
+        }
     }
 
     @PostMapping("register")

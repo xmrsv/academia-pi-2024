@@ -37,8 +37,8 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable());
 
         // Autorización de solicitudes
-        http.authorizeHttpRequests(authRequest
-                -> authRequest
+        http.authorizeHttpRequests(authorizationRequest
+                -> authorizationRequest
                         // Permitir acceso a las rutas de autenticación
                         .requestMatchers("/auth/**").permitAll()
                         // Requerir autenticación para cualquier otra solicitud

@@ -1,16 +1,18 @@
-package upeu.academia.entity;
+package upeu.academia.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -32,18 +34,24 @@ public class Alumno {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String correo;
-    private Date fechaNacimiento;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate fechaNacimiento;
     private String telefono;
 
     @Column(name = "fechaRegistro", nullable = false, updatable = false)
-    private Timestamp fechaRegistro;     // Fecha de registro
+    private LocalDateTime fechaCreacion;     // Fecha de registro
 
-    private Integer estado;     // 1 activo, 0 eliminado 
+    private Integer estado;
 
-    // Método para evitar que fechaRegistro se actualice accidentalmente
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        if (this.fechaRegistro == null) {
-            this.fechaRegistro = fechaRegistro;
+    @PrePersist
+    public void prePersist() {
+        if (this.fechaCreacion == null) {
+            this.fechaCreacion = LocalDateTime.now();
+        }
+
+        if (this.estado == null) {
+            this.estado = 1;
         }
     }
 

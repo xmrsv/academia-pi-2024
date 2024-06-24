@@ -1,6 +1,6 @@
 package upeu.academia.controller;
 
-import upeu.academia.entity.Responsable;
+import upeu.academia.domain.entity.Responsable;
 import upeu.academia.service.IResponsableService;
 import java.util.List;
 import java.util.Optional;
@@ -19,35 +19,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("/apispring")
+@RequestMapping("api")
 public class ResponsableController {
 
     @Autowired
     private IResponsableService responsableService;
 
-    @GetMapping("/responsable")
+    @GetMapping("responsables")
     public List<Responsable> listarTodos() {
         return responsableService.listarTodos();
     }
 
-    @GetMapping("/responsable/{id}")
+    @GetMapping("responsable/{id}")
     public Optional<Responsable> obtenerPorId(@PathVariable("id") Integer responsableId) {
         return responsableService.obtenerPorId(responsableId);
     }
 
-    @PostMapping("/responsable")
+    @PostMapping("responsable")
     public Responsable crear(@RequestBody Responsable responsable) {
         responsableService.crear(responsable);
         return responsable;
     }
 
-    @PutMapping("/responsable")
+    @PutMapping("responsable")
     public Responsable actualizar(@RequestBody Responsable responsable) {
         responsableService.actualizar(responsable);
         return responsable;
     }
 
-    @DeleteMapping("/responsable/{id}")
+    @DeleteMapping("responsable/{id}")
     public void eliminarPorId(@PathVariable("id") Integer responsableId) {
         responsableService.eliminarPorId(responsableId);
     }

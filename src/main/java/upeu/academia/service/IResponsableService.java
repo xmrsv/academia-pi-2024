@@ -1,6 +1,6 @@
 package upeu.academia.service;
 
-import upeu.academia.entity.Responsable;
+import upeu.academia.domain.entity.Responsable;
 import java.util.List;
 import java.util.Optional;
 

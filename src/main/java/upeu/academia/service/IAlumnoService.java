@@ -1,8 +1,9 @@
 package upeu.academia.service;
 
-import upeu.academia.entity.Alumno;
+import upeu.academia.domain.entity.Alumno;
 import java.util.List;
 import java.util.Optional;
+import upeu.academia.domain.dto.AlumnoDTO;
 
 /**
  *
@@ -14,9 +15,9 @@ public interface IAlumnoService {
 
     Optional<Alumno> obtenerPorId(Integer alumnoId);
 
-    void crear(Alumno alumno);
+    Alumno crear(Alumno alumno);
 
-    void actualizar(Alumno alumno);
+    Alumno actualizar(Alumno alumno);
 
     void eliminarPorId(Integer alumnoId);
 

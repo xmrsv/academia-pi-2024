@@ -1,6 +1,6 @@
 package upeu.academia.service.jpa;
 
-import upeu.academia.entity.Disciplina;
+import upeu.academia.domain.entity.Disciplina;
 import upeu.academia.repository.IDisciplinaRepository;
 import upeu.academia.service.IDisciplinaService;
 import java.util.List;

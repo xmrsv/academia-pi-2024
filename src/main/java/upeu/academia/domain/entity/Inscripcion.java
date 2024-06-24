@@ -1,12 +1,14 @@
-package upeu.academia.entity;
+package upeu.academia.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -26,21 +28,29 @@ public class Inscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer alumnoID;
-    private Integer responsableID;
+    private Integer alumnoId;
+    private Integer responsableId;
 
     @Column(name = "fecha_inscripcion", nullable = false, updatable = false)
-    private Timestamp fecha_inscripcion;
+    private LocalDateTime fechaInscripcion;
 
     private Integer estado;
-    private String estadoDisciplina;
-    private Integer disciplinaID;
+    private Integer disciplinaId;
+    private LocalDateTime fechaCreacion;
 
-    // Método para evitar que fechaRegistro se actualice accidentalmente
-    public void setFechaRegistro(Timestamp fecha_inscripcion) {
-        if (this.fecha_inscripcion == null) {
-            this.fecha_inscripcion = fecha_inscripcion;
+    @PrePersist
+    public void prePersist() {
+
+        if (this.fechaInscripcion == null) {
+            this.fechaInscripcion = LocalDateTime.now();
+        }
+
+        if (this.fechaCreacion == null) {
+            this.fechaCreacion = LocalDateTime.now();
+        }
+
+        if (this.estado == null) {
+            this.estado = 1;
         }
     }
-
 }

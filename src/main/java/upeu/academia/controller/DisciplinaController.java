@@ -1,6 +1,6 @@
 package upeu.academia.controller;
 
-import upeu.academia.entity.Disciplina;
+import upeu.academia.domain.entity.Disciplina;
 import upeu.academia.service.IDisciplinaService;
 import java.util.List;
 import java.util.Optional;
@@ -19,35 +19,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("/apispring")
+@RequestMapping("api")
 public class DisciplinaController {
 
     @Autowired
     private IDisciplinaService disciplinaService;
 
-    @GetMapping("/disciplinas")
+    @GetMapping("disciplinas")
     public List<Disciplina> listarTodos() {
         return disciplinaService.listarTodos();
     }
 
-    @GetMapping("/disciplinas/{id}")
+    @GetMapping("disciplina/{id}")
     public Optional<Disciplina> obtenerPorId(@PathVariable("id") Integer disciplinaId) {
         return disciplinaService.obtenerPorId(disciplinaId);
     }
 
-    @PostMapping("/disciplinas")
+    @PostMapping("disciplina")
     public Disciplina crear(@RequestBody Disciplina disciplina) {
         disciplinaService.crear(disciplina);
         return disciplina;
     }
 
-    @PutMapping("/disciplinas")
+    @PutMapping("disciplina")
     public Disciplina actualizar(@RequestBody Disciplina disciplina) {
         disciplinaService.actualizar(disciplina);
         return disciplina;
     }
 
-    @DeleteMapping("/disciplinas/{id}")
+    @DeleteMapping("disciplina/{id}")
     public void eliminarPorId(@PathVariable("id") Integer disciplinaId) {
         disciplinaService.eliminarPorId(disciplinaId);
     }

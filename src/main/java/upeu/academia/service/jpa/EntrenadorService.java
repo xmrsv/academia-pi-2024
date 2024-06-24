@@ -1,6 +1,6 @@
 package upeu.academia.service.jpa;
 
-import upeu.academia.entity.Entrenador;
+import upeu.academia.domain.entity.Entrenador;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
