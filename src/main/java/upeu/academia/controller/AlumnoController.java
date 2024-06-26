@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/alumnos")
 public class AlumnoController {
 
     @Autowired
     private IAlumnoService alumnoService;
 
-    @GetMapping("alumnos")
+    @GetMapping("")
     public ResponseEntity listarTodos() {
         List<Alumno> alumnos = alumnoService.listarTodos();
 
@@ -40,7 +40,7 @@ public class AlumnoController {
         }
     }
 
-    @GetMapping("alumno/{id}")
+    @GetMapping("{id}")
     public ResponseEntity obtenerPorId(@PathVariable("id") Integer alumnoId) {
         Map<String, Object> response = new HashMap<>();
         Optional<Alumno> alumno = alumnoService.obtenerPorId(alumnoId);
@@ -53,7 +53,7 @@ public class AlumnoController {
         }
     }
 
-    @PostMapping("alumno")
+    @PostMapping("")
     public ResponseEntity crear(@RequestBody Alumno nuevoAlumno) {
         Map<String, Object> response = new HashMap<>();
         List<Map<String, String>> errors = new ArrayList<>();
@@ -105,7 +105,7 @@ public class AlumnoController {
         return ResponseEntity.status(201).body(alumnoService.crear(nuevoAlumno));
     }
 
-    @PutMapping("alumno")
+    @PutMapping("")
     public ResponseEntity actualizar(@RequestBody Alumno alumno) {
         Map<String, Object> response = new HashMap<>();
         List<Map<String, String>> errors = new ArrayList<>();
@@ -166,7 +166,7 @@ public class AlumnoController {
         }
     }
 
-    @DeleteMapping("alumno/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Map<String, Object>> eliminarPorId(@PathVariable("id") Integer alumnoId) {
         Map<String, Object> response = new HashMap<>();
 

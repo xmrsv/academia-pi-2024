@@ -25,29 +25,29 @@ public class ResponsableController {
     @Autowired
     private IResponsableService responsableService;
 
-    @GetMapping("responsables")
+    @GetMapping
     public List<Responsable> listarTodos() {
         return responsableService.listarTodos();
     }
 
-    @GetMapping("responsable/{id}")
+    @GetMapping("{id}")
     public Optional<Responsable> obtenerPorId(@PathVariable("id") Integer responsableId) {
         return responsableService.obtenerPorId(responsableId);
     }
 
-    @PostMapping("responsable")
+    @PostMapping
     public Responsable crear(@RequestBody Responsable responsable) {
         responsableService.crear(responsable);
         return responsable;
     }
 
-    @PutMapping("responsable")
+    @PutMapping
     public Responsable actualizar(@RequestBody Responsable responsable) {
         responsableService.actualizar(responsable);
         return responsable;
     }
 
-    @DeleteMapping("responsable/{id}")
+    @DeleteMapping("{id}")
     public void eliminarPorId(@PathVariable("id") Integer responsableId) {
         responsableService.eliminarPorId(responsableId);
     }
