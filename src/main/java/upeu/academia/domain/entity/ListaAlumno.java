@@ -22,6 +22,10 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * 
+ * @author Jerika Reyna
+ */
 @Data
 @Entity
 @Table(name = "lista_alumno")
