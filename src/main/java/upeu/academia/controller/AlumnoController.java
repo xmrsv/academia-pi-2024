@@ -29,7 +29,7 @@ public class AlumnoController {
     @Autowired
     private IAlumnoService alumnoService;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity listarTodos() {
         List<Alumno> alumnos = alumnoService.listarTodos();
 
@@ -53,31 +53,43 @@ public class AlumnoController {
         }
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity crear(@RequestBody Alumno nuevoAlumno) {
         Map<String, Object> response = new HashMap<>();
         List<Map<String, String>> errors = new ArrayList<>();
 
-        if (nuevoAlumno == null || (nuevoAlumno.getDni() == null || nuevoAlumno.getDni().isEmpty())
-                && (nuevoAlumno.getNombres() == null || nuevoAlumno.getNombres().isEmpty())
-                && (nuevoAlumno.getApellidoPaterno() == null || nuevoAlumno.getApellidoPaterno().isEmpty())
-                && (nuevoAlumno.getApellidoMaterno() == null || nuevoAlumno.getApellidoMaterno().isEmpty())
-                && (nuevoAlumno.getCorreo() == null || nuevoAlumno.getCorreo().isEmpty())
+        if (nuevoAlumno == null
+                || (nuevoAlumno.getDni() == null
+                || nuevoAlumno.getDni().isEmpty())
+                && (nuevoAlumno.getNombres() == null
+                || nuevoAlumno.getNombres().isEmpty())
+                && (nuevoAlumno.getApellidoPaterno() == null
+                || nuevoAlumno.getApellidoPaterno().isEmpty())
+                && (nuevoAlumno.getApellidoMaterno() == null
+                || nuevoAlumno.getApellidoMaterno().isEmpty())
+                && (nuevoAlumno.getCorreo() == null
+                || nuevoAlumno.getCorreo().isEmpty())
                 && (nuevoAlumno.getFechaNacimiento() == null)
-                && (nuevoAlumno.getTelefono() == null || nuevoAlumno.getTelefono().isEmpty())) {
+                && (nuevoAlumno.getTelefono() == null
+                || nuevoAlumno.getTelefono().isEmpty())) {
             response.put("error", "no se enviaron datos válidos en la solicitud");
             return ResponseEntity.status(400).body(response);
         }
 
-        if (nuevoAlumno.getDni() == null || nuevoAlumno.getDni().isEmpty() || !(nuevoAlumno.getDni().length() == 8) || !nuevoAlumno.getDni().matches("[0-9]+")) {
+        if (nuevoAlumno.getDni() == null
+                || nuevoAlumno.getDni().isEmpty()
+                || !(nuevoAlumno.getDni().length() == 8)
+                || !nuevoAlumno.getDni().matches("[0-9]+")) {
             errors.add(Map.of("field", "dni", "error", "El campo 'dni' es obligatorio y debe tener 8 dígitos"));
         }
 
-        if (nuevoAlumno.getNombres() == null || nuevoAlumno.getNombres().isEmpty()) {
+        if (nuevoAlumno.getNombres() == null
+                || nuevoAlumno.getNombres().isEmpty()) {
             errors.add(Map.of("field", "nombres", "error", "El campo 'nombres' es obligatorio"));
         }
 
-        if (nuevoAlumno.getApellidoPaterno() == null || nuevoAlumno.getApellidoPaterno().isEmpty()) {
+        if (nuevoAlumno.getApellidoPaterno() == null
+                || nuevoAlumno.getApellidoPaterno().isEmpty()) {
             errors.add(Map.of("field", "apellidoPaterno", "error", "El campo 'apellidoPaterno' es obligatorio"));
         }
 
@@ -105,7 +117,7 @@ public class AlumnoController {
         return ResponseEntity.status(201).body(alumnoService.crear(nuevoAlumno));
     }
 
-    @PutMapping("")
+    @PutMapping
     public ResponseEntity actualizar(@RequestBody Alumno alumno) {
         Map<String, Object> response = new HashMap<>();
         List<Map<String, String>> errors = new ArrayList<>();
@@ -119,7 +131,10 @@ public class AlumnoController {
 
             Alumno alumnoParaActualizar = alumnoExistente.get();
 
-            if (alumno.getDni() != null && !(alumno.getDni().length() == 8) || (alumno.getDni() != null && !alumno.getDni().matches("[0-9]+"))) {
+            if (alumno.getDni() != null 
+                    && !(alumno.getDni().length() == 8) 
+                    || (alumno.getDni() != null 
+                    && !alumno.getDni().matches("[0-9]+"))) {
                 errors.add(Map.of("field", "dni", "error", "El campo 'dni' debe tener 8 dígitos."));
             } else if (alumno.getDni() != null) {
                 alumnoParaActualizar.setDni(alumno.getDni());
@@ -137,7 +152,8 @@ public class AlumnoController {
                 alumnoParaActualizar.setApellidoMaterno(alumno.getApellidoMaterno());
             }
 
-            if (alumno.getCorreo() != null && !alumno.getCorreo().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            if (alumno.getCorreo() != null 
+                    && !alumno.getCorreo().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
                 errors.add(Map.of("field", "correo", "error", "El campo 'correo' debe tener un formato válido."));
             } else if (alumno.getCorreo() != null) {
                 alumnoParaActualizar.setCorreo(alumno.getCorreo());
@@ -147,7 +163,10 @@ public class AlumnoController {
                 alumnoParaActualizar.setFechaNacimiento(alumno.getFechaNacimiento());
             }
 
-            if (alumno.getTelefono() != null && (!(alumno.getTelefono().length() == 9) || !alumno.getTelefono().matches("[0-9]+"))) {
+            if (alumno.getTelefono() != null 
+                    && (
+                    !(alumno.getTelefono().length() == 9) 
+                    || !alumno.getTelefono().matches("[0-9]+"))) {
                 errors.add(Map.of("field", "telefono", "error", "El campo 'telefono' debe tener 9 dígitos."));
             } else if (alumno.getTelefono() != null) {
                 alumnoParaActualizar.setTelefono(alumno.getTelefono());
@@ -155,19 +174,28 @@ public class AlumnoController {
 
             if (!errors.isEmpty()) {
                 response.put("errors", errors);
-                return ResponseEntity.status(400).body(response);
+                return ResponseEntity
+                        .status(400)
+                        .body(response);
             }
 
-            return ResponseEntity.status(200).body(alumnoService.actualizar(alumnoParaActualizar));
+            return ResponseEntity
+                    .status(200)
+                    .body(alumnoService.actualizar(alumnoParaActualizar));
 
         } catch (Exception e) {
-            response.put("error", "Error al actualizar el alumno: " + e.getMessage());
-            return ResponseEntity.status(400).body(response);
+            response.put("error",
+                    "Error al actualizar el alumno: "
+                    + e.getMessage());
+            return ResponseEntity
+                    .status(400)
+                    .body(response);
         }
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Map<String, Object>> eliminarPorId(@PathVariable("id") Integer alumnoId) {
+    public ResponseEntity<Map<String, Object>> eliminarPorId(
+            @PathVariable("id") Integer alumnoId) {
         Map<String, Object> response = new HashMap<>();
 
         try {
