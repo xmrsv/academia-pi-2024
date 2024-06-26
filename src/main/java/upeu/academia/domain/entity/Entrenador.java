@@ -1,5 +1,6 @@
 package upeu.academia.domain.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,14 +31,31 @@ public class Entrenador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true, nullable = false)
     private String dni;
+
+    @Column(nullable = false)
     private String nombres;
+
+    @Column(nullable = false, name = "apellido_paterno")
     private String apellidoPaterno;
+
+    @Column(nullable = false, name = "apellido_materno")
     private String apellidoMaterno;
+
+    @Column(nullable = false)
     private String correo;
+
+    @Column(nullable = false)
     private String telefono;
+
+    @Column(nullable = false)
     private String direccion;
+
+    @Column(nullable = false)
     private Integer estado;
+
+    @Column(nullable = false, updatable = false, name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
 
     @ManyToMany

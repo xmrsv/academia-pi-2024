@@ -43,13 +43,18 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
-     private Role role;
+    @Column(nullable = false)
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
