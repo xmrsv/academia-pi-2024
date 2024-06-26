@@ -49,7 +49,7 @@ public class User implements UserDetails {
     private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
-    Role role;
+     private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

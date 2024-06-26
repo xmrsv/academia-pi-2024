@@ -1,0 +1,10 @@
+package upeu.academia.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import upeu.academia.domain.entity.ListaAlumno;
+
+public interface IListaAlumnoRepository extends JpaRepository<ListaAlumno, Integer> {
+
+    
+}
