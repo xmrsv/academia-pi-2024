@@ -19,8 +19,8 @@ import org.hibernate.annotations.Where;
  */
 @Data
 @Entity
-@Table(name = "disciplinas")
-@SQLDelete(sql = "UPDATE disciplinas SET estado=0 WHERE id=?")
+@Table(name = "disciplina")
+@SQLDelete(sql = "UPDATE disciplina SET estado=0 WHERE id=?")
 @Where(clause = "estado=1")
 public class Disciplina {
 

@@ -20,8 +20,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Data
 @Entity
-@Table(name = "alumnos")
-@SQLDelete(sql = "UPDATE alumnos SET estado=0 WHERE id=?")
+@Table(name = "alumno")
+@SQLDelete(sql = "UPDATE alumno SET estado=0 WHERE id=?")
 @Where(clause = "estado=1")
 public class Alumno {
 
