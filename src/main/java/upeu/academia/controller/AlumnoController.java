@@ -131,9 +131,9 @@ public class AlumnoController {
 
             Alumno alumnoParaActualizar = alumnoExistente.get();
 
-            if (alumno.getDni() != null 
-                    && !(alumno.getDni().length() == 8) 
-                    || (alumno.getDni() != null 
+            if (alumno.getDni() != null
+                    && !(alumno.getDni().length() == 8)
+                    || (alumno.getDni() != null
                     && !alumno.getDni().matches("[0-9]+"))) {
                 errors.add(Map.of("field", "dni", "error", "El campo 'dni' debe tener 8 dígitos."));
             } else if (alumno.getDni() != null) {
@@ -152,7 +152,7 @@ public class AlumnoController {
                 alumnoParaActualizar.setApellidoMaterno(alumno.getApellidoMaterno());
             }
 
-            if (alumno.getCorreo() != null 
+            if (alumno.getCorreo() != null
                     && !alumno.getCorreo().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
                 errors.add(Map.of("field", "correo", "error", "El campo 'correo' debe tener un formato válido."));
             } else if (alumno.getCorreo() != null) {
@@ -163,9 +163,8 @@ public class AlumnoController {
                 alumnoParaActualizar.setFechaNacimiento(alumno.getFechaNacimiento());
             }
 
-            if (alumno.getTelefono() != null 
-                    && (
-                    !(alumno.getTelefono().length() == 9) 
+            if (alumno.getTelefono() != null
+                    && (!(alumno.getTelefono().length() == 9)
                     || !alumno.getTelefono().matches("[0-9]+"))) {
                 errors.add(Map.of("field", "telefono", "error", "El campo 'telefono' debe tener 9 dígitos."));
             } else if (alumno.getTelefono() != null) {
@@ -200,12 +199,12 @@ public class AlumnoController {
 
         try {
             alumnoService.eliminarPorId(alumnoId);
-            response.put("message", "alumno eliminado correctamente");
-            return ResponseEntity.status(200).body(response);
         } catch (Exception e) {
-            response.put("message", "error al eliminar alumno");
-            response.put("error", e.getMessage());
+            response.put("message", e.getMessage());
             return ResponseEntity.status(400).body(response);
         }
+
+        response.put("message", "eliminado correctamente");
+        return ResponseEntity.status(200).body(response);
     }
 }

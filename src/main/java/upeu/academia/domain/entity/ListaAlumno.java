@@ -37,13 +37,11 @@ public class ListaAlumno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
     @OneToMany(cascade = CascadeType.ALL)
     private List<Alumno> alumnos;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "entrenador_id")
-    @Column(nullable = false)
     private Entrenador entrenador;
 
     @Column(nullable = false, name = "disciplinia_id")
