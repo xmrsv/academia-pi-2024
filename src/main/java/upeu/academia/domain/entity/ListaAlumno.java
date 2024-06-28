@@ -18,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -51,6 +52,9 @@ public class ListaAlumno {
     private Integer horarioId;
 
     @Column(nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    private Disciplina disciplina;
+
     private Integer estado;
 
     @Column(nullable = false, name = "instalacion_id")
