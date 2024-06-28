@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -39,11 +40,11 @@ public class ListaAlumno {
     @JoinColumn(name = "entrenador_id")
     private Entrenador entrenador;
 
-    
-    private Integer disciplinaId;
-    private Integer horarioId;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Disciplina disciplina;
+
     private Integer estado;
-    private Integer instalacionId;
+    
     private LocalDateTime fechaCreacion;
 
     @Enumerated(EnumType.STRING)
