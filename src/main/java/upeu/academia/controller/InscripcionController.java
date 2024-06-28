@@ -19,35 +19,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/inscripciones")
 public class InscripcionController {
 
     @Autowired
     private InscripcionService inscripcionService;
 
-    @GetMapping("inscripciones")
+    @GetMapping
     public List<Inscripcion> listarTodos() {
         return inscripcionService.listarTodos();
     }
 
-    @GetMapping("inscripcion/{id}")
+    @GetMapping("{id}")
     public Optional<Inscripcion> obtenerPorId(@PathVariable("id") Integer inscripcionId) {
         return inscripcionService.obtenerPorId(inscripcionId);
     }
 
-    @PostMapping("inscripcion")
+    @PostMapping
     public Inscripcion crear(@RequestBody Inscripcion inscripcion) {
         inscripcionService.crear(inscripcion);
         return inscripcion;
     }
 
-    @PutMapping("inscripcion")
+    @PutMapping
     public Inscripcion actualizar(@RequestBody Inscripcion inscripcion) {
         inscripcionService.actualizar(inscripcion);
         return inscripcion;
     }
 
-    @DeleteMapping("inscripcion/{id}")
+    @DeleteMapping("{id}")
     public void eliminarPorId(@PathVariable("id") Integer inscripcionId) {
         inscripcionService.eliminarPorId(inscripcionId);
     }

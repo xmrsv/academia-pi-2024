@@ -19,35 +19,35 @@ import upeu.academia.service.IEntrenadorService;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/entrenadores")
 public class EntrenadorController {
 
     @Autowired
     private IEntrenadorService entrenadorService;
 
-    @GetMapping("entrenadores")
+    @GetMapping
     public List<Entrenador> listarTodos() {
         return entrenadorService.listarTodos();
     }
 
-    @GetMapping("entrenador/{id}")
+    @GetMapping("{id}")
     public Optional<Entrenador> obtenerPorId(@PathVariable("id") Integer entrenadorId) {
         return entrenadorService.obtenerPorId(entrenadorId);
     }
 
-    @PostMapping("entrenador")
+    @PostMapping
     public Entrenador crear(@RequestBody Entrenador entrenador) {
         entrenadorService.crear(entrenador);
         return entrenador;
     }
 
-    @PutMapping("entrenador")
+    @PutMapping
     public Entrenador actualizar(@RequestBody Entrenador entrenador) {
         entrenadorService.actualizar(entrenador);
         return entrenador;
     }
 
-    @DeleteMapping("entrenador/{id}")
+    @DeleteMapping("{id}")
     public void eliminarPorId(@PathVariable("id") Integer entrenadorId) {
         entrenadorService.eliminarPorId(entrenadorId);
     }

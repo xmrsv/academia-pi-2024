@@ -20,8 +20,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Data
 @Entity
-@Table(name = "alumnos")
-@SQLDelete(sql = "UPDATE alumnos SET estado=0 WHERE id=?")
+@Table(name = "alumno")
+@SQLDelete(sql = "UPDATE alumno SET estado=0 WHERE id=?")
 @Where(clause = "estado=1")
 public class Alumno {
 
@@ -29,19 +29,30 @@ public class Alumno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true, nullable = false)
     private String dni;
+
+    @Column(nullable = false)
     private String nombres;
+
+    @Column(nullable = false, name = "apellido_paterno")
     private String apellidoPaterno;
+
+    @Column(nullable = false, name = "apellido_materno")
     private String apellidoMaterno;
+
     private String correo;
 
+    @Column(name = "fecha_nacimiento")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate fechaNacimiento;
+
     private String telefono;
 
-    @Column(name = "fechaRegistro", nullable = false, updatable = false)
-    private LocalDateTime fechaCreacion;     // Fecha de registro
+    @Column(name = "fecha_creacion", nullable = false, updatable = false)
+    private LocalDateTime fechaCreacion;
 
+    @Column(nullable = false)
     private Integer estado;
 
     @PrePersist

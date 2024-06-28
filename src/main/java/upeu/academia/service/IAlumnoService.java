@@ -3,7 +3,6 @@ package upeu.academia.service;
 import upeu.academia.domain.entity.Alumno;
 import java.util.List;
 import java.util.Optional;
-import upeu.academia.domain.dto.AlumnoDTO;
 
 /**
  *
@@ -19,6 +18,6 @@ public interface IAlumnoService {
 
     Alumno actualizar(Alumno alumno);
 
-    void eliminarPorId(Integer alumnoId);
+    void eliminarPorId(Integer alumnoId) throws Exception;
 
 }

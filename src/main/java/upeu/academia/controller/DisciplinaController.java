@@ -19,35 +19,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/disciplinas")
 public class DisciplinaController {
 
     @Autowired
     private IDisciplinaService disciplinaService;
 
-    @GetMapping("disciplinas")
+    @GetMapping
     public List<Disciplina> listarTodos() {
         return disciplinaService.listarTodos();
     }
 
-    @GetMapping("disciplina/{id}")
+    @GetMapping("{id}")
     public Optional<Disciplina> obtenerPorId(@PathVariable("id") Integer disciplinaId) {
         return disciplinaService.obtenerPorId(disciplinaId);
     }
 
-    @PostMapping("disciplina")
+    @PostMapping
     public Disciplina crear(@RequestBody Disciplina disciplina) {
         disciplinaService.crear(disciplina);
         return disciplina;
     }
 
-    @PutMapping("disciplina")
+    @PutMapping
     public Disciplina actualizar(@RequestBody Disciplina disciplina) {
         disciplinaService.actualizar(disciplina);
         return disciplina;
     }
 
-    @DeleteMapping("disciplina/{id}")
+    @DeleteMapping("{id}")
     public void eliminarPorId(@PathVariable("id") Integer disciplinaId) {
         disciplinaService.eliminarPorId(disciplinaId);
     }

@@ -14,35 +14,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
-
-
-
+/**
+ * 
+ * @author Jerika Reyna
+ */
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/lista-alumnos")
 public class ListaAlumnoController {
+
     @Autowired
     private ListaAlumnoService listaAlumnoService;
 
-    @GetMapping("listaAlumnos")
+    @GetMapping
     public List<ListaAlumno> listarTodos() {
         return listaAlumnoService.listarTodos();
     }
-    
-    @GetMapping("listaAlumno/{id}")
+
+    @GetMapping("{id}")
     public Optional<ListaAlumno> obtenerPorId(@PathVariable("id") Integer id) {
         return listaAlumnoService.obtenerPorId(id);
     }
-    
 
-    @PostMapping("listaAlumno")
+    @PostMapping
     public ListaAlumno crear(@RequestBody ListaAlumno listaAlumno) {
         listaAlumnoService.crear(listaAlumno);
         return listaAlumno;
     }
 
-    @PutMapping("listaAlumno/{id}")
+    @PutMapping("{id}")
     public ListaAlumno actualizar(@RequestBody ListaAlumno listaAlumno) {
         listaAlumnoService.actualizar(listaAlumno);
         return listaAlumno;

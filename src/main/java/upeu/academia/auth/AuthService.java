@@ -25,16 +25,19 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse login(LoginRequest request) throws Exception {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
-        
-        System.err.println(user.getUsername());
-        
+        authenticationManager
+                .authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                request.getUsername(), request.getPassword()
+                        )
+                );
+        UserDetails user = userRepository
+                .findByUsername(request.getUsername())
+                .orElseThrow();
         String token = jwtService.getToken(user);
         return AuthResponse.builder()
                 .token(token)
                 .build();
-
     }
 
     public AuthResponse register(RegisterRequest request) {

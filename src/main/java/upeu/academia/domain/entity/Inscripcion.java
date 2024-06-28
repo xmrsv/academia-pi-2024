@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -19,8 +18,8 @@ import org.hibernate.annotations.Where;
  */
 @Data
 @Entity
-@Table(name = "inscripciones")
-@SQLDelete(sql = "UPDATE inscripciones SET estado=0 WHERE id=?")
+@Table(name = "inscripcion")
+@SQLDelete(sql = "UPDATE inscripcion SET estado=0 WHERE id=?")
 @Where(clause = "estado=1")
 public class Inscripcion {
 
@@ -28,14 +27,22 @@ public class Inscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false, name = "alumno_id")
     private Integer alumnoId;
+
+    @Column(nullable = false, name = "responsable_id")
     private Integer responsableId;
 
     @Column(name = "fecha_inscripcion", nullable = false, updatable = false)
     private LocalDateTime fechaInscripcion;
 
+    @Column(nullable = false)
     private Integer estado;
+
+    @Column(nullable = false)
     private Integer disciplinaId;
+
+    @Column(nullable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
     @PrePersist

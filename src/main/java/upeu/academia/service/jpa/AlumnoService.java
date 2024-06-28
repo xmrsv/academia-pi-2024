@@ -39,7 +39,11 @@ public class AlumnoService implements IAlumnoService {
     }
 
     @Override
-    public void eliminarPorId(Integer alumnoId) {
+    public void eliminarPorId(Integer alumnoId) throws Exception {
+
+        if (!alumnoRepository.existsById(alumnoId)) {
+            throw new Exception("usuario no encontrado");
+        }
         alumnoRepository.deleteById(alumnoId);
     }
 

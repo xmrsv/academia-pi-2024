@@ -12,6 +12,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -27,13 +28,20 @@ public class JwtService {
     }
 
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {
+        
+        Date expiration = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");    
+        System.out.println(sdf.format(expiration));
+        
+        extraClaims.put("prettyExp", sdf.format(expiration));
+        extraClaims.put("role", user.getAuthorities());
+        
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                // 1 day until expire
-                .setExpiration(new Date(System.currentTimeMillis() * 1000 * 60 * 24))
+                .setExpiration(expiration)
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
