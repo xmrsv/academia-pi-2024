@@ -51,7 +51,6 @@ public class ListaAlumno {
     @Column(nullable = false, name = "horario_id")
     private Integer horarioId;
 
-    @Column(nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private Disciplina disciplina;
 
