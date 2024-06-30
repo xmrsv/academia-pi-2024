@@ -1,9 +1,9 @@
 package upeu.academia.service;
 
+import upeu.academia.domain.entity.ListaAlumno;
+
 import java.util.List;
 import java.util.Optional;
-
-import upeu.academia.domain.entity.ListaAlumno;
 
 public interface IListaAlumnoService {
 

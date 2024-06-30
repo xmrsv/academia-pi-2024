@@ -1,12 +1,13 @@
 package upeu.academia.service.jpa;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import upeu.academia.domain.entity.Responsable;
 import upeu.academia.repository.IResponsableRepository;
 import upeu.academia.service.IResponsableService;
+
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *

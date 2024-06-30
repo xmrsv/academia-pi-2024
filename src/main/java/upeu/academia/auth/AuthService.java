@@ -1,14 +1,14 @@
 package upeu.academia.auth;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
+import upeu.academia.User.UserRepository;
 import upeu.academia.domain.entity.Role;
 import upeu.academia.domain.entity.User;
-import upeu.academia.User.UserRepository;
 import upeu.academia.jwt.JwtService;
 
 /**

@@ -1,8 +1,9 @@
 package upeu.academia.User;
 
-import upeu.academia.domain.entity.User;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import upeu.academia.domain.entity.User;
+
+import java.util.Optional;
 
 /**
  *

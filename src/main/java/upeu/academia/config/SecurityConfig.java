@@ -33,10 +33,7 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Deshabilitar CSRF
         http.csrf(csrf -> csrf.disable());
-
-        // Autorización de solicitudes
         http.authorizeHttpRequests(authorizationRequest
                 -> authorizationRequest
                         // Permitir acceso a las rutas de autenticación
@@ -45,7 +42,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
         );
 
-        // Gestión de sesiones
         http.sessionManagement(sessionManager
                 -> sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );

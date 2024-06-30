@@ -1,7 +1,7 @@
 package upeu.academia.repository;
 
-import upeu.academia.domain.entity.Entrenador;
 import org.springframework.data.jpa.repository.JpaRepository;
+import upeu.academia.domain.entity.Entrenador;
 
 /**
  *
