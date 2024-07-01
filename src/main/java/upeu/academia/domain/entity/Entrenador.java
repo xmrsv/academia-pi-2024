@@ -52,7 +52,7 @@ public class Entrenador {
 
     @ManyToMany
     @JoinTable(
-            name = "entrenador_disciplinas", // nombre de la tabla intermedia que se utilizará para almacenar la relación muchos a muchos.
+            name = "entrenador_disciplina", // nombre de la tabla intermedia que se utilizará para almacenar la relación muchos a muchos.
             joinColumns = @JoinColumn(name = "entrenador_id"),
             inverseJoinColumns = @JoinColumn(name = "disciplina_id")
     )

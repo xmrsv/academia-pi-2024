@@ -1,17 +1,17 @@
 package upeu.academia.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import upeu.academia.domain.entity.Alumno;
 import upeu.academia.service.IAlumnoService;
 
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
+import upeu.academia.controller.responses.ErrorResponse;
 
-/**
- *
- * @author Carlos Omar
- */
 @RestController
 @RequestMapping("api/alumnos")
 public class AlumnoController {
@@ -20,181 +20,52 @@ public class AlumnoController {
     private IAlumnoService alumnoService;
 
     @GetMapping
-    public ResponseEntity listarTodos() {
+    public ResponseEntity<List<Alumno>> listarTodos() {
         List<Alumno> alumnos = alumnoService.listarTodos();
-
-        if (alumnos.isEmpty()) {
-            return ResponseEntity.status(204).build();
-        } else {
-            return ResponseEntity.status(200).body(alumnos);
-        }
+        return alumnos.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok(alumnos);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity obtenerPorId(@PathVariable("id") Integer alumnoId) {
-        Map<String, Object> response = new HashMap<>();
-        Optional<Alumno> alumno = alumnoService.obtenerPorId(alumnoId);
-
-        if (alumno.isPresent()) {
-            return ResponseEntity.status(200).body(alumno.get());
-        } else {
-            response.put("message", "alumno con ID " + alumnoId + " no existe");
-            return ResponseEntity.status(404).body(response);
+    public ResponseEntity<Alumno> obtenerPorId(@PathVariable("id") Integer alumnoId) {
+        try {
+            Alumno alumno = alumnoService.obtenerPorId(alumnoId);
+            return ResponseEntity.ok(alumno);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity crear(@RequestBody Alumno nuevoAlumno) {
-        Map<String, Object> response = new HashMap<>();
-        List<Map<String, String>> errors = new ArrayList<>();
-
-        if (nuevoAlumno == null
-                || (nuevoAlumno.getDni() == null
-                || nuevoAlumno.getDni().isEmpty())
-                && (nuevoAlumno.getNombres() == null
-                || nuevoAlumno.getNombres().isEmpty())
-                && (nuevoAlumno.getApellidoPaterno() == null
-                || nuevoAlumno.getApellidoPaterno().isEmpty())
-                && (nuevoAlumno.getApellidoMaterno() == null
-                || nuevoAlumno.getApellidoMaterno().isEmpty())
-                && (nuevoAlumno.getCorreo() == null
-                || nuevoAlumno.getCorreo().isEmpty())
-                && (nuevoAlumno.getFechaNacimiento() == null)
-                && (nuevoAlumno.getTelefono() == null
-                || nuevoAlumno.getTelefono().isEmpty())) {
-            response.put("error", "no se enviaron datos válidos en la solicitud");
-            return ResponseEntity.status(400).body(response);
+    public ResponseEntity<?> crear(@Valid @RequestBody Alumno nuevoAlumno) {
+        try {
+            Alumno alumnoCreado = alumnoService.crear(nuevoAlumno);
+            return ResponseEntity.status(HttpStatus.CREATED).body(alumnoCreado);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(e.getMessage()));
         }
-
-        if (nuevoAlumno.getDni() == null
-                || nuevoAlumno.getDni().isEmpty()
-                || !(nuevoAlumno.getDni().length() == 8)
-                || !nuevoAlumno.getDni().matches("[0-9]+")) {
-            errors.add(Map.of("field", "dni", "error", "El campo 'dni' es obligatorio y debe tener 8 dígitos"));
-        }
-
-        if (nuevoAlumno.getNombres() == null
-                || nuevoAlumno.getNombres().isEmpty()) {
-            errors.add(Map.of("field", "nombres", "error", "El campo 'nombres' es obligatorio"));
-        }
-
-        if (nuevoAlumno.getApellidoPaterno() == null
-                || nuevoAlumno.getApellidoPaterno().isEmpty()) {
-            errors.add(Map.of("field", "apellidoPaterno", "error", "El campo 'apellidoPaterno' es obligatorio"));
-        }
-
-        if (nuevoAlumno.getApellidoMaterno() == null || nuevoAlumno.getApellidoMaterno().isEmpty()) {
-            errors.add(Map.of("field", "apellidoMaterno", "error", "El campo 'apellidoMaterno' es obligatorio"));
-        }
-
-        if (nuevoAlumno.getCorreo() == null || nuevoAlumno.getCorreo().isEmpty() || !nuevoAlumno.getCorreo().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            errors.add(Map.of("field", "correo", "error", "El campo 'correo' es obligatorio y debe tener un formato válido"));
-        }
-
-        if (nuevoAlumno.getFechaNacimiento() == null) {
-            errors.add(Map.of("field", "fechaNacimiento", "error", "El campo 'fechaNacimiento' es obligatorio"));
-        }
-
-        if (nuevoAlumno.getTelefono() == null || nuevoAlumno.getTelefono().isEmpty() || !(nuevoAlumno.getTelefono().length() == 9) || !nuevoAlumno.getTelefono().matches("[0-9]+")) {
-            errors.add(Map.of("field", "telefono", "error", "El campo 'telefono' es obligatorio y debe tener 9 dígitos"));
-        }
-
-        if (!errors.isEmpty()) {
-            response.put("errors", errors);
-            return ResponseEntity.status(400).body(response);
-        }
-
-        return ResponseEntity.status(201).body(alumnoService.crear(nuevoAlumno));
     }
 
-    @PutMapping
-    public ResponseEntity actualizar(@RequestBody Alumno alumno) {
-        Map<String, Object> response = new HashMap<>();
-        List<Map<String, String>> errors = new ArrayList<>();
-
+    @PutMapping("{id}")
+    public ResponseEntity<?> actualizar(@PathVariable("id") Integer id, @Valid @RequestBody Alumno alumno) {
         try {
-            Optional<Alumno> alumnoExistente = alumnoService.obtenerPorId(alumno.getId());
-            if (!alumnoExistente.isPresent()) {
-                response.put("error", "El alumno no existe.");
-                return ResponseEntity.status(404).body(response);
-            }
-
-            Alumno alumnoParaActualizar = alumnoExistente.get();
-
-            if (alumno.getDni() != null
-                    && !(alumno.getDni().length() == 8)
-                    || (alumno.getDni() != null
-                    && !alumno.getDni().matches("[0-9]+"))) {
-                errors.add(Map.of("field", "dni", "error", "El campo 'dni' debe tener 8 dígitos."));
-            } else if (alumno.getDni() != null) {
-                alumnoParaActualizar.setDni(alumno.getDni());
-            }
-
-            if (alumno.getNombres() != null) {
-                alumnoParaActualizar.setNombres(alumno.getNombres());
-            }
-
-            if (alumno.getApellidoPaterno() != null) {
-                alumnoParaActualizar.setApellidoPaterno(alumno.getApellidoPaterno());
-            }
-
-            if (alumno.getApellidoMaterno() != null) {
-                alumnoParaActualizar.setApellidoMaterno(alumno.getApellidoMaterno());
-            }
-
-            if (alumno.getCorreo() != null
-                    && !alumno.getCorreo().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-                errors.add(Map.of("field", "correo", "error", "El campo 'correo' debe tener un formato válido."));
-            } else if (alumno.getCorreo() != null) {
-                alumnoParaActualizar.setCorreo(alumno.getCorreo());
-            }
-
-            if (alumno.getFechaNacimiento() != null) {
-                alumnoParaActualizar.setFechaNacimiento(alumno.getFechaNacimiento());
-            }
-
-            if (alumno.getTelefono() != null
-                    && (!(alumno.getTelefono().length() == 9)
-                    || !alumno.getTelefono().matches("[0-9]+"))) {
-                errors.add(Map.of("field", "telefono", "error", "El campo 'telefono' debe tener 9 dígitos."));
-            } else if (alumno.getTelefono() != null) {
-                alumnoParaActualizar.setTelefono(alumno.getTelefono());
-            }
-
-            if (!errors.isEmpty()) {
-                response.put("errors", errors);
-                return ResponseEntity
-                        .status(400)
-                        .body(response);
-            }
-
-            return ResponseEntity
-                    .status(200)
-                    .body(alumnoService.actualizar(alumnoParaActualizar));
-
-        } catch (Exception e) {
-            response.put("error",
-                    "Error al actualizar el alumno: "
-                    + e.getMessage());
-            return ResponseEntity
-                    .status(400)
-                    .body(response);
+            Alumno alumnoActualizado = alumnoService.actualizar(id, alumno);
+            return ResponseEntity.ok(alumnoActualizado);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(e.getMessage()));
         }
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Map<String, Object>> eliminarPorId(
-            @PathVariable("id") Integer alumnoId) {
-        Map<String, Object> response = new HashMap<>();
-
+    public ResponseEntity<Void> eliminarPorId(@PathVariable("id") Integer alumnoId) {
         try {
             alumnoService.eliminarPorId(alumnoId);
-        } catch (Exception e) {
-            response.put("message", e.getMessage());
-            return ResponseEntity.status(400).body(response);
+            return ResponseEntity.noContent().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
         }
-
-        response.put("message", "eliminado correctamente");
-        return ResponseEntity.status(200).body(response);
     }
 }
