@@ -22,7 +22,7 @@ public class LoginRequest {
     @Size(min = 3, max = 16, message = "El nombre de usuario debe tener entre 3 y 16 caracteres")
     String username;
 
-    @Min(value = 3, message = "La contraseña debe tener al menos 3 caracteres")
+    @Size(min = 3, message = "La contraseña debe tener al menos 3 caracteres")
     @NotBlank(message = "La contraseña es requerida")
     String password;
 
