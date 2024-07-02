@@ -1,7 +1,8 @@
 package upeu.academia.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import lombok.RequiredArgsConstructor;
 import upeu.academia.domain.entity.Entrenador;
 import upeu.academia.service.IEntrenadorService;
 
@@ -13,11 +14,11 @@ import java.util.Optional;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("api/entrenadores")
+@RequestMapping("api/v2/entrenadores")
+@RequiredArgsConstructor
 public class EntrenadorController {
 
-    @Autowired
-    private IEntrenadorService entrenadorService;
+    private final IEntrenadorService entrenadorService;
 
     @GetMapping
     public List<Entrenador> listarTodos() {

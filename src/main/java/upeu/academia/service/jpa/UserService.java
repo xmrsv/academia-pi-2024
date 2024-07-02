@@ -10,6 +10,10 @@ import upeu.academia.domain.entity.User;
 import upeu.academia.repository.IUserRepository;
 import upeu.academia.service.IUserService;
 
+/**
+ * 
+ * @author Miguel Gonzales
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService implements IUserService {

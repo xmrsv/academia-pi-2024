@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/v1/responsables")
 public class ResponsableController {
 
     @Autowired

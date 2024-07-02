@@ -1,7 +1,8 @@
 package upeu.academia.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import lombok.RequiredArgsConstructor;
 import upeu.academia.domain.entity.ListaAlumno;
 import upeu.academia.service.jpa.ListaAlumnoService;
 
@@ -13,11 +14,11 @@ import java.util.Optional;
  * @author Jerika Reyna
  */
 @RestController
-@RequestMapping("api/lista-alumnos")
+@RequestMapping("api/v1/lista-alumnos")
+@RequiredArgsConstructor
 public class ListaAlumnoController {
 
-    @Autowired
-    private ListaAlumnoService listaAlumnoService;
+    private final ListaAlumnoService listaAlumnoService;
 
     @GetMapping
     public List<ListaAlumno> listarTodos() {
@@ -35,7 +36,7 @@ public class ListaAlumnoController {
         return listaAlumno;
     }
 
-    @PutMapping("{id}")
+    @PutMapping
     public ListaAlumno actualizar(@RequestBody ListaAlumno listaAlumno) {
         listaAlumnoService.actualizar(listaAlumno);
         return listaAlumno;

@@ -30,7 +30,6 @@ public class Disciplina {
     @Column(nullable = false)
     private String nombre;
 
-    @NotBlank(message = "El costo es obligatorio")
     @DecimalMin(value = "0.01", message = "El costo debe ser mayor a 0.01")
     @Column(nullable = false)
     private BigDecimal costo;

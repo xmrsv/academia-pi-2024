@@ -2,11 +2,7 @@ package upeu.academia.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import upeu.academia.auth.AuthResponse;
 import upeu.academia.auth.AuthService;
@@ -42,7 +38,7 @@ public class AuthController {
 
     @PostMapping("register")
     public ResponseEntity<AuthResponse> register(
-        @Valid @RequestBody RegisterRequest request) {
+            @Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
 }

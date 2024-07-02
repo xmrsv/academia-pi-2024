@@ -1,7 +1,8 @@
 package upeu.academia.service.jpa;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 import upeu.academia.domain.entity.Alumno;
 import upeu.academia.repository.IAlumnoRepository;
 import upeu.academia.service.IAlumnoService;
@@ -16,10 +17,10 @@ import java.util.Optional;
  * @author Carlos Omar
  */
 @Service
+@RequiredArgsConstructor
 public class AlumnoService implements IAlumnoService {
 
-    @Autowired
-    private IAlumnoRepository alumnoRepository;
+    private final IAlumnoRepository alumnoRepository;
 
     @Override
     public List<Alumno> listarTodos() {

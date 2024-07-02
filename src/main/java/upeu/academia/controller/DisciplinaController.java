@@ -1,7 +1,8 @@
 package upeu.academia.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import lombok.RequiredArgsConstructor;
 import upeu.academia.domain.entity.Disciplina;
 import upeu.academia.service.IDisciplinaService;
 
@@ -13,11 +14,11 @@ import java.util.Optional;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("api/disciplinas")
+@RequestMapping("api/v1/disciplinas")
+@RequiredArgsConstructor
 public class DisciplinaController {
 
-    @Autowired
-    private IDisciplinaService disciplinaService;
+    private final IDisciplinaService disciplinaService;
 
     @GetMapping
     public List<Disciplina> listarTodos() {

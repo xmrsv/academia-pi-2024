@@ -4,6 +4,10 @@ import java.util.Optional;
 
 import upeu.academia.domain.entity.User;
 
+/**
+ * 
+ * @author Miguel Gonzales
+ */
 public interface IUserService {
     
     Optional<User> obtenerPorUsername(String username); 

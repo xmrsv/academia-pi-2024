@@ -1,7 +1,8 @@
 package upeu.academia.service.jpa;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 import upeu.academia.domain.entity.Disciplina;
 import upeu.academia.repository.IDisciplinaRepository;
 import upeu.academia.service.IDisciplinaService;
@@ -14,10 +15,10 @@ import java.util.Optional;
  * @author Carlos Omar
  */
 @Service
+@RequiredArgsConstructor
 public class DisciplinaService implements IDisciplinaService {
 
-    @Autowired
-    private IDisciplinaRepository disciplinaRepository;
+    private final IDisciplinaRepository disciplinaRepository;
 
     @Override
     public List<Disciplina> listarTodos() {

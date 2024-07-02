@@ -5,6 +5,10 @@ import upeu.academia.domain.entity.ListaAlumno;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * 
+ * @author Jerika Reyna
+ */
 public interface IListaAlumnoService {
 
     List<ListaAlumno> listarTodos();

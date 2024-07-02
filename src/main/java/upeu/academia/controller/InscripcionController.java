@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author Carlos Omar
  */
 @RestController
-@RequestMapping("api/inscripciones")
+@RequestMapping("api/v1/inscripciones")
 public class InscripcionController {
 
     @Autowired

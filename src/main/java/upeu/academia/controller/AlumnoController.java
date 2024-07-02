@@ -1,9 +1,9 @@
 package upeu.academia.controller;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import upeu.academia.domain.entity.Alumno;
 import upeu.academia.service.IAlumnoService;
@@ -15,11 +15,11 @@ import java.util.Optional;
 import upeu.academia.controller.responses.ErrorResponse;
 
 @RestController
-@RequestMapping("api/alumnos")
+@RequestMapping("api/v2/alumnos")
+@RequiredArgsConstructor
 public class AlumnoController {
 
-    @Autowired
-    private IAlumnoService alumnoService;
+    private final IAlumnoService alumnoService;
 
     @GetMapping
     public ResponseEntity<List<Alumno>> listarTodos() {

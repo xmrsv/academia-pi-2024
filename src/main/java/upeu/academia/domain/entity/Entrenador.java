@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,7 +26,6 @@ public class Entrenador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @UniqueElements(message = "El DNI debe ser único.")
     @NotBlank(message = "El DNI es obligatorio.")
     @Size(min = 8, max = 8, message = "El DNI debe tener 8 dígitos.")
     @Column(unique = true, nullable = false)
