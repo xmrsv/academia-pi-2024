@@ -35,10 +35,9 @@ public class EntrenadorController {
         return entrenador;
     }
 
-    @PutMapping
-    public Entrenador actualizar(@RequestBody Entrenador entrenador) {
-        entrenadorService.actualizar(entrenador);
-        return entrenador;
+    @PutMapping("{id}") // Agrega el ID a la ruta
+    public Entrenador actualizar(@PathVariable("id") Integer id, @RequestBody Entrenador entrenador) {
+        return entrenadorService.actualizar(id, entrenador); // Pasa el ID al método
     }
 
     @DeleteMapping("{id}")

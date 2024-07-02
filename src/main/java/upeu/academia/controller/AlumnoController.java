@@ -10,6 +10,8 @@ import upeu.academia.service.IAlumnoService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import upeu.academia.controller.responses.ErrorResponse;
 
 @RestController
@@ -30,8 +32,8 @@ public class AlumnoController {
     @GetMapping("{id}")
     public ResponseEntity<Alumno> obtenerPorId(@PathVariable("id") Integer alumnoId) {
         try {
-            Alumno alumno = alumnoService.obtenerPorId(alumnoId);
-            return ResponseEntity.ok(alumno);
+            Optional<Alumno> alumno = alumnoService.obtenerPorId(alumnoId);
+            return ResponseEntity.ok(alumno.get());
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }

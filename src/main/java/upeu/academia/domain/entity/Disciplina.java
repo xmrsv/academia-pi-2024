@@ -1,6 +1,8 @@
 package upeu.academia.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -23,9 +25,13 @@ public class Disciplina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
     @Column(nullable = false)
     private String nombre;
 
+    @NotBlank(message = "El costo es obligatorio")
+    @DecimalMin(value = "0.01", message = "El costo debe ser mayor a 0.01")
     @Column(nullable = false)
     private BigDecimal costo;
 

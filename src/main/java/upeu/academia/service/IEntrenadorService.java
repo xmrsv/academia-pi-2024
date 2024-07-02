@@ -15,10 +15,9 @@ public interface IEntrenadorService {
 
     Optional<Entrenador> obtenerPorId(Integer entrenadorId);
 
-    void crear(Entrenador entrenador);
+    Entrenador crear(Entrenador entrenador);
 
-    void actualizar(Entrenador entrenador);
+    Entrenador actualizar(Integer id, Entrenador entrenador);
 
     void eliminarPorId(Integer entrenadorId);
-
 }

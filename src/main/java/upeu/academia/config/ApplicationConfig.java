@@ -1,6 +1,8 @@
 package upeu.academia.config;
 
 import lombok.RequiredArgsConstructor;
+import upeu.academia.repository.IUserRepository;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import upeu.academia.User.UserRepository;
 
 /**
  * Configuración de autenticación para la aplicación.
@@ -22,7 +23,7 @@ import upeu.academia.User.UserRepository;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
 
     /**
      * Crea el AuthenticationManager de Spring Security.

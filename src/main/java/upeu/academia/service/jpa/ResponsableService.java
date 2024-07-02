@@ -25,8 +25,8 @@ public class ResponsableService implements IResponsableService {
     }
 
     @Override
-    public void crear(Responsable responsable) {
-        responsableRepository.save(responsable);
+    public Responsable crear(Responsable responsable) {
+        return responsableRepository.save(responsable);
     }
 
     @Override

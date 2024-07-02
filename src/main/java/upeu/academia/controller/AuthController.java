@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
 import upeu.academia.auth.AuthResponse;
 import upeu.academia.auth.AuthService;
 import upeu.academia.auth.LoginRequest;
@@ -26,7 +28,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
 
         Map<String, Object> response = new HashMap<>();
 
@@ -39,7 +41,8 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthResponse> register(
+        @Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
 }

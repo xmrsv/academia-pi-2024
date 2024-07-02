@@ -25,13 +25,13 @@ public class DisciplinaService implements IDisciplinaService {
     }
 
     @Override
-    public void crear(Disciplina disciplina) {
-        disciplinaRepository.save(disciplina);
+    public Disciplina crear(Disciplina disciplina) {
+        return disciplinaRepository.save(disciplina);
     }
 
     @Override
-    public void actualizar(Disciplina disciplina) {
-        disciplinaRepository.save(disciplina);
+    public Disciplina actualizar(Disciplina disciplina) {
+        return disciplinaRepository.save(disciplina);
     }
 
     @Override

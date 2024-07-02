@@ -9,4 +9,6 @@ import upeu.academia.domain.entity.Responsable;
  */
 public interface IResponsableRepository extends JpaRepository<Responsable, Integer> {
 
+    Boolean existsByDni(String dni); // Verificar si existe el DNI, para validaciones
+
 }

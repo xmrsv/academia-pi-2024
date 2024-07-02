@@ -15,7 +15,7 @@ public interface IResponsableService {
 
     Optional<Responsable> obtenerPorId(Integer responsableId);
 
-    void crear(Responsable responsable);
+    Responsable crear(Responsable responsable);
 
     void actualizar(Responsable responsable);
 

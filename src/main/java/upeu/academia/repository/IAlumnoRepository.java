@@ -9,6 +9,6 @@ import upeu.academia.domain.entity.Alumno;
  */
 public interface IAlumnoRepository extends JpaRepository<Alumno, Integer> {
 
-    Boolean existsByDni(String dni);
-    
+    Boolean existsByDni(String dni); // Verificar si existe el DNI, para validaciones
+
 }

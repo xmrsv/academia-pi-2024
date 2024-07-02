@@ -15,9 +15,9 @@ public interface IDisciplinaService {
 
     Optional<Disciplina> obtenerPorId(Integer disciplinaId);
 
-    void crear(Disciplina disciplina);
+    Disciplina crear(Disciplina disciplina);
 
-    void actualizar(Disciplina disciplina);
+    Disciplina actualizar(Disciplina disciplina);
 
     void eliminarPorId(Integer disciplinaId);
 

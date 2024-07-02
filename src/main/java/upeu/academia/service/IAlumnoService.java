@@ -3,6 +3,7 @@ package upeu.academia.service;
 import upeu.academia.domain.entity.Alumno;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -12,11 +13,11 @@ public interface IAlumnoService {
 
     List<Alumno> listarTodos();
 
-    Alumno obtenerPorId(Integer alumnoId);
+    Optional<Alumno> obtenerPorId(Integer alumnoId);
 
     Alumno crear(Alumno alumno);
 
     Alumno actualizar(Integer id, Alumno alumno);
 
-    void eliminarPorId(Integer alumnoId); // Eliminamos 'throws Exception'
+    void eliminarPorId(Integer alumnoId);
 }
